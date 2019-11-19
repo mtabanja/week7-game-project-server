@@ -47,7 +47,15 @@ function roomFactory(stream) {
     //update this user only:
     const updated = await user.update({ roomId: room.id });
     console.log("user test:", updated);
-    res.send(updated);
+    const rooms = await Room.find({ include: [User] });
+    const action = {
+      type: "ROOMS",
+      payload: rooms
+    };
+    const string = JSON.stringify(action);
+
+    stream.send(string);
+    res.send(room);
   });
 
   return router;
