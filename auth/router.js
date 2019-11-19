@@ -8,6 +8,7 @@ const auth = require("./middleware");
 router.post("/login", (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
+  console.log("email", email);
 
   if (!email || !password) {
     res.status(400).send({

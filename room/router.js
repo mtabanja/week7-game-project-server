@@ -1,11 +1,12 @@
 const express = require("express");
 const { Router } = express;
 const Room = require("./model");
+const auth = require("../auth/middleware");
 
 function roomFactory(stream) {
   const router = new Router();
 
-  router.post("/room", (req, res) => {
+  router.post("/room", auth, (req, res) => {
     Room.create(req.body).then(room => {
       console.log("room", room);
       const data = JSON.stringify({
