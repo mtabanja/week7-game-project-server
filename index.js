@@ -10,6 +10,7 @@ const authrouter = require("./auth/router");
 const Sse = require("json-sse");
 const Room = require("./room/model");
 const roomFactory = require("./room/router");
+const User = require("./user/model");
 
 app.use(corsMiddleware);
 
@@ -19,7 +20,7 @@ const roomRouter = roomFactory(stream);
 
 app.get("/stream", async (req, res) => {
   // get all the rooms from the database
-  const rooms = await Room.findAll();
+  const rooms = await Room.findAll({ include: [User] });
 
   // serialize the list of rooms
   const string = JSON.stringify({
