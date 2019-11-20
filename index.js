@@ -11,6 +11,7 @@ const Sse = require("json-sse");
 const Room = require("./room/model");
 const roomFactory = require("./room/router");
 const User = require("./user/model");
+const quizRouter = require("./quiz/router");
 
 app.use(corsMiddleware);
 
@@ -48,4 +49,5 @@ app.use(parserMiddleware);
 app.use(userRouter);
 app.use(authrouter);
 app.use(roomRouter);
+app.use(quizRouter);
 app.listen(port, () => console.log(`App Available on port ${port}!`));
