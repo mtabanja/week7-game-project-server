@@ -13,7 +13,7 @@ const Room = sequelize.define(
   {
     timestamps: false
   }
-});
+);
 
 User.belongsTo(Room);
 Room.hasMany(User);

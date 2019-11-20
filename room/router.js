@@ -18,7 +18,7 @@ function roomFactory(stream) {
       res.send(room);
     });
   });
-  router.put("/join/:name", auth, async (req, res) => {
+  router.put("/join/:name", auth, async (req, res, next) => {
     const { user } = req;
     if (!user) {
       return next("no user found");
@@ -29,12 +29,12 @@ function roomFactory(stream) {
     });
 
     const updated = await user.update({ roomId: room.id });
-    const rooms = await Room.find({ include: [User] });
-    const string = JSON.stringify(action);
+    const rooms = await Room.findAll({ include: [User] });
     const action = {
       type: "ROOMS",
       payload: rooms
     };
+    const string = JSON.stringify(action);
     stream.send(string);
 
     res.send(updated);
