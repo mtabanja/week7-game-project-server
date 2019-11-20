@@ -1,13 +1,15 @@
 const Sequelize = require("sequelize");
 const sequelize = require("../db");
-const User = require("../user/model");
 
-const Room = sequelize.define(
-  "room",
+const Answers = sequelize.define(
+  "answer",
   {
     name: {
       type: Sequelize.STRING,
       allowNull: false
+    },
+    correct: {
+      type: Sequelize.STRING
     }
   },
   {
@@ -15,7 +17,4 @@ const Room = sequelize.define(
   }
 );
 
-User.belongsTo(Room);
-Room.hasMany(User);
-
-module.exports = Room;
+module.exports = Answers;
