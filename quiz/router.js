@@ -10,14 +10,14 @@ router.get("/questions", (req, res, next) =>
 );
 
 router.post("/questions", (req, res, next) => {
-  Questions.create({ name: "what" })
+  Questions.create(req.body)
     .then(name => res.json(name))
     .catch(err => next(err));
 });
 
 router.post("/answers", (req, res, next) => {
-  Answers.create({ name: "the answer", correct: "false", questionId: 1 })
-    .then(name => res.json(name))
+  Answers.create(req.body)
+    .then(response => res.json(response))
     .catch(err => next(err));
 });
 
