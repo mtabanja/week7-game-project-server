@@ -9,4 +9,11 @@ router.get("/questions", (req, res, next) =>
     .catch(err => next(err))
 );
 
+router.post("/questions", (req, res, next) => {
+  Questions.create(req.body)
+    .then(name => res.json(name))
+
+    .catch(err => next(err));
+});
+
 module.exports = router;
