@@ -11,13 +11,15 @@ const Sse = require("json-sse");
 const Room = require("./room/model");
 const roomFactory = require("./room/router");
 const User = require("./user/model");
-const quizRouter = require("./quiz/router");
+const quizFactory = require("./quiz/quizFactory");
+const questionRouter = require("./quiz/router");
 
 app.use(corsMiddleware);
 
 const stream = new Sse();
 
 const roomRouter = roomFactory(stream);
+const quizRouter = quizFactory(stream);
 
 app.get("/stream", async (req, res) => {
   // get all the rooms from the database
@@ -49,5 +51,6 @@ app.use(parserMiddleware);
 app.use(userRouter);
 app.use(authrouter);
 app.use(roomRouter);
+app.use(questionRouter);
 app.use(quizRouter);
 app.listen(port, () => console.log(`App Available on port ${port}!`));
