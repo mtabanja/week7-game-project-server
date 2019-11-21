@@ -12,7 +12,8 @@ router.get("/user", (req, res, next) =>
 router.post("/user", (req, res, next) => {
   const user = {
     email: req.body.email,
-    password: bcrypt.hashSync(req.body.password, 10)
+    password: bcrypt.hashSync(req.body.password, 10),
+    points: 0
   };
   User.create(user)
     .then(user => res.json(user))
