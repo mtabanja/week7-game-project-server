@@ -10,27 +10,16 @@ router.get("/questions", (req, res, next) =>
     .catch(err => next(err))
 );
 
-// router.put("/points/:userId", async (req, res, next) => {
-//   const { userId } = req.params;
+router.post("/questions", (req, res, next) => {
+  Questions.create(req.body)
+    .then(name => res.json(name))
+    .catch(err => next(err));
+});
 
-//   const user = await User.findByPk(userId);
-
-//   const updated = await user.update({ points: 1 });
-
-//   // const rooms = await Room
-//   //   .findAll({ include: [User] })
-
-//   // const action = {
-//   //   type: 'ROOMS',
-//   //   payload: rooms
-//   // }
-
-//   // const string = JSON
-//   //   .stringify(action)
-
-//   // stream.send(string)
-//   console.log("updated testinggg:", updated);
-//   res.send(updated);
-// });
+router.post("/answers", (req, res, next) => {
+  Answers.create(req.body)
+    .then(response => res.json(response))
+    .catch(err => next(err));
+});
 
 module.exports = router;
