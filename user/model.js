@@ -14,7 +14,8 @@ const User = sequelize.define(
     },
     points: {
       type: Sequelize.INTEGER
-    }
+    },
+    ready: Sequelize.BOOLEAN
   },
   { timestamps: false }
 );
